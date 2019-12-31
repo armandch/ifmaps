@@ -1,0 +1,178 @@
+title "Zork 1";
+
+###############################################################################
+map "Ground";
+
+### House Area ###
+room "West of House" tag west_of_house start exit w n s ne se;
+item "leaflet";
+room "North of House" tag north_of_house dir n 2 e 2 exit w e n sw se link west_of_house;
+room "Behind House" tag behind_house dir e 2 s 2 exit n s w e nw sw link north_of_house;
+task "open window" tag open_window;
+room "South of House" tag south_of_house dir s 2 w 2 exit e w s ne nw link behind_house west_of_house;
+link west_of_house to south_of_house dir s 2 e 2;
+
+### Forest Area ###
+room "Forest Path" tag forest_path dir n from north_of_house exit s n;
+room "Up a Tree" tag up_a_tree dir ne go up;
+item "jewel egg" tag jewel_egg score 5;
+room "Forest" tag forest1 dir e 3 from forest_path exit w s e;
+room "Clearing" tag clearing1 dir s 3 exit e w n link behind_house;
+room "Forest" tag forest2 dir e from forest1 exit w n s note "impassable mountain";
+link forest2 to forest1 dir n sw oneway;
+link forest2 to forest1 dir s nw oneway;
+room "Clearing" tag clearing2 dir n 2 from forest_path exit s e w;
+link clearing2 to forest1 dir e 3 s 2 oneway;
+item "pile of leaves";
+room "Forest" tag forest3 dir w nw from west_of_house oneway exit e n s note "sunlight to the east";
+link forest3 to forest_path dir e n 2 e 3;
+link forest3 to clearing2 dir n 4 e 4;
+room "Forest" tag forest4 dir s e 2 se from south_of_house exit n w nw;
+link forest4 to forest3 dir w 7 n 5;
+link forest4 to clearing1 dir n 4;
+
+### Canyon Area ###
+room "Canyon View" tag canyon_view dir e se from clearing1 exit nw;
+room "Rocky Ledge" tag rocky_ledge dir s go down;
+room "Canyon Bottom" tag canyon_bottom dir se go down exit n;
+room "End of Rainbow" tag end_of_rainbow dir n 4 ne exit sw e;
+
+### Inside House ###
+room "Kitchen" tag kitchen after open_window dir w from behind_house exit e w score 10;
+item "glass bottle";
+item "quantity of water";
+item "brown sack";
+item "clove of garlic";
+item "lunch";
+room "Attic" tag attic dir nw go up;
+item "coil of rope";
+item "nasty-looking knife";
+room "Living Room" tag living_room dir w from kitchen exit e;
+item "elvish sword" tag sword;
+item "brass lantern" tag lantern keep;
+task "collect jewel egg" need jewel_egg lose jewel_egg score 5;
+task "collect painting" need painting lose painting score 6;
+room "Cellar" join cellar dir s go down oneway need lantern cmd "move rug, open trap door, go down" score 25;
+
+
+###############################################################################
+map "Underground";
+
+### House Basement ###
+room "Cellar" tag cellar exit n s;
+room "East of Chasm" tag east_of_chasm dir s exit n e;
+room "Gallery" tag gallery dir e exit w n;
+item "painting" tag painting score 4;
+room "Studio" tag studio dir n exit s;
+item "piece of paper";
+room "Kitchen" dir n join kitchen go up oneway;
+room "The Troll Room" tag troll_room dir n 2 from cellar exit s e w;
+task "kill Troll" tag kill_troll need sword cmd "attack troll with sword";
+item "axe" tag axe;
+room "Maze" join m1 dir w exit e;
+
+### Center Round Room Area ###
+room "East-West Passage" tag east_west_passage dir e 2 from troll_room exit w e score 5;
+room "Round Room" tag round_room dir e 2 exit e w s n se;
+
+### Dam Area ###
+room "Chasm" tag chasm dir n ne 2 from east_west_passage go down exit sw ne s;
+room "North-South Passage" tag north_south_passage dir s 2 exit n s ne link round_room;
+room "Deep Canyon" tag deep_canyon dir ne 2 exit e nw sw;
+room "Reservoir South" tag reservoir_south dir nw exit se sw w e link chasm;
+room "Stream View" tag stream_view dir w exit e;
+room "Dam" tag dam dir e 2 from reservoir_south exit n s w;
+task "control panel puzzle";
+link deep_canyon to dam dir e n;
+room "Dam Base" tag dam_base dir e s go down exit n;
+item "folded pile of plastic";
+room "Dam Lobby" tag dam_lobby dir n from dam exit s n e;
+item "tour guidebook";
+item "matchbook";
+room "Maintenance Room" tag maintenance_room dir e n exit s w;
+link maintenance_room to dam_lobby dir w s;
+item "wrench";
+item "tube of toothpaste";
+item "screwdriver";
+item "tool chests";
+task "buttons puzzle";
+
+### White Cliffs Beach Area ###
+room "Loud Room" tag loud_room dir e from round_room exit e w;
+link deep_canyon to loud_room dir s 2 w s go down;
+item "platinum bar";
+room "Damp Cave" tag damp_cave dir e exit w e s;
+task "pass narrow south path";
+room "White Cliffs Beach" tag whie_cliffs_beach1 dir e exit w s;
+room "White Cliff Beach" tag white_cliffs_beach2 dir s exit n;
+
+### Dome Area ###
+room "Engravings Cave" tag engravings_cave dir se from round_room exit nw e;
+room "Dome Room" tag dome_room dir e;
+task "go down dome";
+
+### South Mirror Room Area ###
+room "Narrow Passage" tag narrow_passage1 dir s from round_room exit n s;
+room "Mirror Room" tag mirror_room1 dir s exit n w e;
+room "Winding Passage" tag winding_passage1 dir w s exit e n;
+room "Cave" tag cave1 dir e exit w n;
+link cave1 to mirror_room1 dir n oneway;
+link mirror_room1 to cave1 dir e s w oneway;
+
+room "Entrance to Hades" tag entrance_to_hades dir s from cave1 go down exit s;
+
+###############################################################################
+map "Maze";
+
+### Maze Area 1 ###
+room "Maze (1)" tag m1 exit e n w s;
+link m1 to m1 dir n;
+room "Maze (2)" tag m2 dir w 2 s 2 exit n w e;
+room "Dead End" tag dead_end1 dir e n exit s;
+room "Maze (3)" tag m3 dir w s from m2 exit n w;
+room "Maze (4)" tag m4 dir w exit e s;
+link m4 to m1 dir s e 4 n 4;
+link m4 to m2 dir n ne se go down oneway;
+
+### Maze Area 2 ###
+room "Maze (5)" tag m5 dir s 4 from m3 go up oneway exit n e sw;
+link m5 to m3 dir n oneway;
+item "skeleton key";
+item "rusty knife";
+item "burned-out lantern";
+item "leather bag of coins" score 10;
+room "Dead End" tag dead_end2 dir e from m5 exit w;
+room "Maze (6)" tag m6 dir sw from m5 oneway exit w e;
+link m6 to m6 dir w;
+link m6 to m5 dir s w n 2 e 2 go down oneway;
+room "Maze (7)" tag m7 dir e s e from m6 exit w s e;
+link m7 to dead_end1 dir n ne 3 n 3 nw w go down oneway;
+room "Maze (8)" tag m8 dir e 5 s from m7 oneway exit w ne se;
+link m8 to m7 dir ne n w 5 sw oneway;
+link m8 to m8 dir w;
+room "Dead End" tag dead_end3 dir se s from m8 exit n;
+room "Maze (9)" tag m9 dir s 7 e 3 n 2 from m7 exit w s se;
+room "Cyclops Room" tag cyclops_room dir se from m9 exit nw;
+room "Maze (10)" tag m10 dir w n 2 e from m9 exit w s ne nw;
+link m10 to m10 dir nw;
+link m10 to m7 dir s e n 3 w 3 nw oneway;
+link m10 to m7 dir ne n w 3 nw oneway;
+link m7 to m10 dir se e 2 s 2 go up oneway;
+
+### Maze Area 3 ###
+room "Maze (11)" tag m11 dir se sw w 2 s 2 from m6 go up oneway exit n nw s e;
+link m11 to m6 dir n 2 e 2 ne nw oneway;
+link m11 to m11 dir nw;
+link m11 to m14 dir w 4 sw 2 s e 2 go down oneway;
+room "Maze (12)" tag m12 dir s w from m11;
+room "Maze (13)" tag m13 dir s e from m12;
+link m13 to m11 dir e n 2 w;
+link m13 to m14 dir sw s 4 sw w 4 nw n 3 ne e 2 go up;
+room "Maze (14)" tag m14 dir w 3 sw se from m12;
+room "Grating Room" tag grating_room dir ne from m14;
+room "Maze (15)" tag m15 dir sw 2 s 2 ne from m14; # try U D
+link m15 to m12 dir e 2 ne n 3 ne oneway;
+link m12 to m15 dir sw s 3 sw w 2 go down oneway;
+link m15 to m11 dir se e 4 ne 2 n 7 sw 2 go up oneway;
+link m15 to m5 dir s 3 w 2 nw n 5 ne 4 e 3 n 4 ne e 2 se go down oneway;
+room "Dead End" tag dead_endr dir n from m15;

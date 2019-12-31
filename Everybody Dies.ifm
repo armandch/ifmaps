@@ -1,0 +1,33 @@
+title "Everybody Dies";
+
+###############################################################################
+map "Graham";
+
+room "Bridge" tag bridge exit e w;
+
+room "West Side of Bridge" tag west_bridge dir w from bridge exit w e n;
+
+room "Clearing in the Woods" tag clearing dir n from west_bridge exit s e;
+
+room "Edge of River" tag edge_of_river dir e from clearing exit w e;
+
+room "Water" tag water dir e from edge_of_river exit w;
+
+###############################################################################
+map "Ranni";
+
+room "Cost Cutters Bathroom" tag bathroom exit nw n ne s;
+
+room "Northwest Bathroom Stall" tag nw_stall dir nw from bathroom exit se;
+
+room "North Bathroom Stall" tag n_stall dir n from bathroom exit s;
+
+room "Northeast Bathroom Stall" tag ne_stall dir ne from bathroom exit sw;
+
+###############################################################################
+map "Lisa";
+
+room "Cost Cutters" tag cost_cutters exit n s e;
+
+room "Staffroom" tag staffroom dir s from cost_cutters exit n;
+

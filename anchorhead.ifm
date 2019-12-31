@@ -1,0 +1,24 @@
+title "Anchorhead";
+
+#################################################################################
+map "Anchorhead";
+
+room "Outside the Real Estate Office" tag outside_office start exit w e se;
+
+room "Alley" tag alley dir se 2 exit nw;
+item "wooden fence";
+item "transom-style window";
+task "move garbage can under window";
+task "climb up cans" after last;
+task "enter window" tag enter_window after last;
+
+room "Narrow Beach" dir e exit w;
+item "sewer pipe";
+
+room "File Room" after enter_window dir n 2 from alley exit s w;
+
+room "Office" tag office dir w exit w e;
+link office to outside_office dir w;
+item "desk" note "locked drawer";
+
+room "Narrow Street" dir w from outside_office exit e w s nw n;

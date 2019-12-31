@@ -1,0 +1,284 @@
+title "Leadlight";
+
+#################################################################################
+map "School";
+
+room "Linville Student Library" tag library exit e s w start;
+item "corpse of Charlotte";
+item "pink iPod";
+task "listen iPod" tag got_blog_password note "password: untouched";
+item "libary desk";
+task "examine hairpin" score 1;
+
+room "Amongst the Library Stacks" exit n dir s;
+item "Debbie Moore";
+item "hockey stick" keep score 1;
+task "wield stick" tag wield_stick;
+
+room "Library Toilet" exit e dir w from library;
+item "high window";
+item "toilet door";
+task "examine toilet door" score 1;
+
+room "Library Foyer" exit e w dir e from library;
+item "Narelle Parker";
+task "kill Narelle Parker" after wield_stick score 2 note "stick becomes stump afterwards";
+
+room "Quadrangle" tag quadrangle exit w s e n dir e 2;
+
+room "School Steps" tag school_steps exit n e w s dir n 3;
+item "shears" tag shears keep score 1;
+item "electonic PIN entry device";
+task "unlock door" tag unlocked_door after got_pin;
+item "welcome mat";
+task "examine mat" need gloves score 1 note "wear gloves";
+item "key" tag key after last note "small silver key";
+
+room "Trellised Patio" tag patio exit w dir e 2;
+item "old gardener";
+task "kill old gardener" score 1;
+item "gloves" tag gloves hidden after last;
+
+room "By the School Fountain" tag fountain exit n s e dir w 2 from school_steps;
+task "examine fountain" get locket score 1;
+item "small locket" tag locket hidden;
+item "mystery girl";
+task "kill mystery girl" after art_cottage_visited score 1;
+
+room "Art Cottage" dir n exit s;
+item "Mr Rhodes";
+task "kill Mr Rhodes" score 1;
+item "paintbrush" keep score 1;
+task "examine painting";
+item "apple" after last score 1;
+task "examine kiln";
+item "figurine of yourself" after last score 1;
+task "Art Cottage visited" tag art_cottage_visited;
+
+room "Staff Cottage B" dir s from fountain exit n;
+item "file";
+task "get file";
+item "Miss Arden";
+task "kill Miss Arden" after last score 1;
+task "read file" after last score 1;
+
+room "Dormitory Courtyard" tag courtyard exit e s w dir e 2 from quadrangle;
+task "hide" note "hide behind either pillar or tree";
+item "curlicued pillar";
+item "eucalyptus tree";
+
+room "Dormitory Entryway" tag dorm_entry exit e n s w dir e;
+item "Mrs Palmer";
+task "kill Mrs Palmer" score 1;
+item "Diane Fallon";
+task "kill Diane Fallon" tag kill_diane after dorm_hall_visited score 1;
+
+room "Room 101" exit n dir s;
+item "Sheryl Bourke";
+task "help Sheryl" cmd "give locket" need locket lose locket score 5;
+
+room "Halfway Along the Dorm Hall" tag dorm_halfway exit w e n s dir e from dorm_entry;
+task "dorm hall visited" tag dorm_hall_visited;
+
+room "Room 102" exit n dir s;
+item "Louise";
+task "kill Louise" score 1;
+item "mobile phone" hidden after last;
+task "examine drawer";
+item "a jar of peanuts" keep hidden after last;
+
+room "Dorm Hall's East End" tag dorm_east exit w n s dir e from dorm_halfway;
+item "vending machine";
+task "purchase Coke" after enough_coins score 1;
+item "can of Coke" after last;
+
+room "Room 103" exit n dir s note "your room";
+item "mirror";
+item "wardrobe";
+task "open wardrobe";
+item "bellet slippers" hidden after last;
+task "read diary" after last score 1;
+task "smash mirror" need shears score 1;
+item "a shard of glass" after last score 1;
+
+room "Room 104" exit s dir n from dorm_east;
+task "hide under either bed or desk";
+task "close window" tag close_window;
+item "2 dollar coins" tag coins_2;
+
+room "Room 105" exit s dir n from dorm_halfway;
+item "iMac";
+task "examine iMac" tag got_pin after got_blog_password score 1 note "PIN: 2237";
+
+room "Room 106" exit s dir n from dorm_entry after kill_diane;
+item "a piece of paper" note "Diane's application form";
+
+room "Gym Entry" tag gym_entry exit n s dir s 2 from courtyard;
+
+room "Gym Court, North" tag gym_court_north exit n s dir s;
+
+room "Gym Court, South" exit n dir s;
+item "locker";
+task "examine locker";
+item "Maglite torch" tag maglite hidden after last;
+
+room "Upstairs Changing Room" go up dir e from gym_court_north;
+item "Isabelle Green";
+task "kill Isabelle" score 1;
+item "bench";
+item "cabinet";
+task "examine cabinet";
+item "croquet mallet" hidden after last score 1;
+
+room "Rose Garden Lawn" exit n dir s 2 from quadrangle;
+item "Alexis Karpa";
+task "help Alexis"  cmd "rescue Alexis" need shears score 5;
+
+room "School Foyer" tag school_foyer exit s n w e dir n from school_steps after unlocked_door;
+item "trophy case";
+task "unlock trophy case" need key;
+item "founder's crest" hidden after last;
+item "china cat";
+task "smash china cat";
+item "1 dollar coin" tag coins_1 after last;
+task "gather 3 dollars coins" tag enough_coins need coins_1 lose coins_1 need coins_2 lose coins_2;
+
+room "Receptionist's Office" exit e dir w;
+item "lunchbox";
+task "open lunchbox";
+item "cheese" hidden after last;
+item "hole";
+item "safe";
+task "open safe" need glasses score 1;
+item "signet ring" after last;
+item "out tray";
+
+room "Sick Bay" exit w dir e from school_foyer;
+item "flimsy sheet" tag sheet;
+task "remove sheet" lose sheet;
+item "screwdriver" hidden after last score 1;
+task "kill corpse" score 1;
+item "closet";
+task "open closet";
+item "summer uniform" after last;
+item "medical kit" after last;
+
+room "Marble Stateroom" exit n s dir n from school_foyer;
+item "deadly sculpture";
+item "Maureen Sallis";
+task "kill Maureen";
+item "brochure";
+task "read brochure" score 1;
+
+room "South Hall" tag south_hall exit n s e dir n;
+item "Lucinda" note "might be some other room near by";
+task "kill Lucinda" after fireplace_visited_again score 1;
+item "ribbon" tag ribbon hidden after last;
+
+room "Sitting Room" exit n w need maglite dir e style Dark;
+item "settee";
+item "fireplace";
+task "examine fireplace" tag fireplace_visited score 1;
+item "poker" hidden after last score 1;
+task "hide in fireplace" tag fireplace_visited_again after eastern_hallway_visited;
+
+room "Eastern Hallway" tag eastern_hallway exit n s w e dir n style Dark;
+item "Mia Ferrini";
+task "kill Mia" score 1;
+item "toy wand" after last score 1;
+task "eastern hallway visited" tag eastern_hallway_visited after fireplace_visited;
+
+room "Grand Hall" tag grand_hall exit n s e w dir w style Dark;
+item "Seung";
+item "Kate";
+item "Madison";
+item "3 dobermans";
+task "kill dobermans" score 3;
+link grand_hall to south_hall;
+
+room "Dance Room" exit w dir e from eastern_hallway;
+task "open drapes" score 1;
+task "dance" after last score 1;
+item "record" after last;
+
+room "Waiting Room" tag waiting_room exit n s w dir n from eastern_hallway;
+item "oak door";
+item "piano";
+item "lounge";
+item "tall fern";
+item "bellpull";
+task "tie ribbon to bellpull" need ribbon lose ribbon;
+task "pull ribbon" after last;
+task "hide behind tall fern" tag unlocked_staff_library after last;
+
+room "Science Lab 1C" tag lab_1c exit e s dir w style Dark;
+item "3d glasses" tag glasses;
+link lab_1c to grand_hall;
+
+room "School Chapel" exit e dir w from grand_hall;
+item "junior girl";
+item "school backpack";
+task "examine backpack";
+item "note" hidden after last;
+item "rows of pews";
+task "examine pews";
+task "reveal mousehole" after last;
+
+room "Staff Library" exit s dir n from waiting_room after unlocked_staff_library;
+item "tome";
+task "read tome" score 1;
+item "illuminated panel";
+task "insert crest into panel" tag unlocked_study;
+
+room "Leather Study" tag study exit s e w dir n after unlocked_study;
+item "globe";
+task "insert ring" tag unlock_ladder score 1 note "don't wear necklace or tie";
+
+room "Curtained Hallway (1)" exit e w dir w;
+item "pillars";
+item "purple curtains";
+
+room "Curtained Hallway (2)" exit e w dir w;
+item "pillars";
+item "crimson curtains";
+task "hide behind pillar";
+
+room "Opulent Corner" exit n e dir w;
+item "Eve";
+task "kill Eve" score 1;
+item "2 wicker automatons";
+task "kill wicker automatons" score 2;
+item "alchemist";
+task "kill alchemist" score 1;
+item "metal grille";
+task "open grille" score 1;
+item "white bread sandwich" hidden after last;
+
+room "Before the Leadlight Door" exit s dir n;
+item "leadlight door";
+task "ring bell" need bell score 1;
+
+room "???" dir n style Dark;
+task "hurry going north";
+
+room "Founder's Room" exit s dir n;
+item "Irma Nadel";
+task "wield hairpin" score 2;
+task "attack founder" score 1 after last;
+task "attack shadow" score 1 after last;
+task "go through secret door" after last;
+
+room "Secret Place" dir e oneway;
+item "founder";
+task "kill founder" score 1;
+task "survived the night" after last score 12 finish;
+
+room "Strange Gallery" exit w dir e from study;
+item "strange paintings";
+task "examine witch" after kill_witch;
+item "bell" tag bell after last;
+
+room "Balcony" go up dir ne from study after unlock_ladder;
+item "witch";
+task "push witch" tag kill_witch score 1;
+
