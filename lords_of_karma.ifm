@@ -1,0 +1,224 @@
+title "Lords of Karma";
+
+map "Golconda";
+
+room "Central Square" tag central_square
+  exit n s w;
+
+room "North Gate" tag gate_north
+  dir n from central_square
+  exit n s e w;
+
+room "Royal Palace" tag royal_palace
+  dir w from central_square
+  exit e;
+
+room "Market" tag market
+  dir s from central_square
+  exit n s e;
+item "torch" tag torch
+  in market;
+item "6 matches" tag matches
+  in market;
+item "brass farthing" tag farthing
+  in market;
+
+room "Garbage Dump" tag dump
+  dir e from market
+  exit n s e w;
+link dump to maple_forest_2 dir s ne oneway;
+link dump to maple_forest_2 dir n se oneway;
+
+room "South Gate" tag gate_south
+  dir s from market
+  exit n s e w;
+
+room "Maple Forest" tag maple_forest_1
+  dir e 2 from gate_south
+  exit n e w;
+
+room "Maple Forest" tag maple_forest_2
+  dir n from maple_forest_1
+  exit n s e w;
+link maple_forest_2 to dump dir w;
+
+room "Maple Forest" tag maple_forest_3
+  dir e n from maple_forest_1 oneway
+  exit e w;
+link maple_forest_3 to maple_forest_2 dir w;
+
+room "Maple Forest" tag maple_forest_4
+  dir e from maple_forest_3
+  exit e w;
+
+room "Maple Forest" tag maple_forest_5
+  dir e from maple_forest_4
+  exit n e w;
+
+room "Maple Forest" tag maple_forest_6
+  dir e from maple_forest_5
+  exit e w;
+
+room "Maple Forest" tag maple_forest_7
+  dir e from maple_forest_6
+  exit w s;
+
+room "Maple Forest" tag maple_forest_8
+  dir n 2 from maple_forest_2
+  exit s e w;
+link maple_forest_8 to gate_north dir w;
+link maple_forest_8 to maple_forest_3 dir e s 2 oneway;
+
+room "Pine Forest" tag pine_forest_1
+  dir n 4 from maple_forest_5
+  exit n s;
+
+room "Pine forest" tag pine_forest_2
+  dir n from pine_forest_1 oneway
+  exit n w;
+
+room "Pine Forest" tag pine_forest_3
+  dir n from pine_forest_2 oneway
+  exit w;
+
+room "Pine Forest" tag pine_forest_4
+  dir w from pine_forest_3 oneway
+  exit s w;
+link pine_forest_4 to mountain_top_1 dir s;
+
+room "Pine Forest" tag pine_forest_5
+  dir w from pine_forest_4 oneway
+  exit s;
+
+room "Pine Forest" tag pine_forest_6
+  dir s from pine_forest_5 oneway
+  exit s e;
+link pine_forest_6 to mountain_top_1 dir e;
+
+room "Pine Forest" tag pine_forest_7
+  dir s from pine_forest_6 oneway
+  exit e w;
+
+room "Pine Forest" tag pine_forest_8
+  dir e from pine_forest_7 oneway
+  exit n e;
+link pine_forest_8 to mountain_top_1 dir n;
+link pine_forest_8 to pine_forest_1 dir e oneway;
+
+room "Mountain Top" tag mountain_top_1
+  dir w from pine_forest_2
+  exit n s e w;
+
+room "Chapel of Prayer Entry" tag chapel_entry
+  dir w 3 from pine_forest_7
+  exit s e w;
+
+room "Chapel of Prayer" tag chapel
+  dir n from chapel_entry go up;
+
+room "Narrow Valley" tag valley
+  dir s from chapel_entry
+  exit n s;
+link valley to gate_north dir s;
+
+room "Aspen Forest" tag aspen_forest_1
+  dir w 2 from chapel_entry
+  exit n e w;
+
+room "Aspen Forest" tag aspen_forest_2
+  dir w from aspen_forest_1
+  exit n e w;
+
+room "Aspen Forest" tag aspen_forest_3
+  dir w from aspen_forest_2
+  exit n s e;
+
+room "Aspen Forest" tag aspen_forest_4
+  dir n from aspen_forest_3
+  exit n s e;
+
+room "Aspen Forest" tag aspen_forest_5
+  dir e from aspen_forest_4
+  exit n s e w;
+link aspen_forest_5 to aspen_forest_2 dir s;
+
+room "Aspen Forest" tag aspen_forest_6
+  dir e from aspen_forest_5
+  exit n s w;
+link aspen_forest_6 to aspen_forest_1 dir s;
+
+room "Aspen Forest" tag aspen_forest_7
+  dir n from aspen_forest_4
+  exit n s e;
+
+room "Aspen Forest" tag aspen_forest_8
+  dir e from aspen_forest_7
+  exit s e w;
+link aspen_forest_8 to aspen_forest_5 dir s;
+
+room "Aspen Forest" tag aspen_forest_9
+  dir e from aspen_forest_8
+  exit s w;
+link aspen_forest_9 to aspen_forest_6 dir s;
+
+room "Mountain Trail" tag mountain_trail_1
+  dir n from aspen_forest_7
+  exit n s;
+
+room "Mountain Trail" tag mountain_trail_2
+  dir n from mountain_trail_1
+  exit n s;
+
+room "Mountain Top" tag mountain_top_2
+  dir n from mountain_trail_2
+  exit s;
+item "book" tag book;
+
+room "Oak Forest" tag oak_forest_1
+  dir s 3 from aspen_forest_3
+  exit n e;
+
+room "Oak Forest" tag oak_forest_2
+  dir e from oak_forest_1
+  exit e w;
+
+room "Oak Forest" tag oak_forest_3
+  dir e from oak_forest_2
+  exit n s w;
+
+room "Oak Forest" tag oak_forest_4
+  dir n from oak_forest_3
+  exit s e w;
+link oak_forest_4 to gate_north dir e;
+link oak_forest_4 to oak_forest_2 dir w s oneway;
+
+map "Storm Drain";
+join market to sewer_1 go down;
+
+room "Sewer" tag sewer_1
+  exit s w;
+item "garnet" tag garnet
+  in sewer_1;
+
+room "Royal Dungeon" tag royal_dungeon
+  dir w from sewer_1
+  exit e;
+item "mirror" tag mirror;
+
+room "Sewer" tag sewer_2
+  dir s from sewer_1
+  exit n;
+item "copper penny" tag penny;
+
+map "Swamp";
+join swamp_1 to sewer_2 go down;
+
+room "Cyprus Swamp" tag swamp_1
+  exit s e w;
+
+map "Trail of Tears";
+join swamp_1 to trail_1 go west;
+
+room "Trail of Tears" tag trail_1
+  exit n s e w;
+

@@ -1,0 +1,17 @@
+###############################################################################
+# Title : Zork 2 Map (IFM 5.4)
+# Author: I-Fan Chen <armandch@gmail.com>
+# Build command:
+#         % ifm -m -f ps -o zork2.ps zork2.ifm
+###############################################################################
+
+title "Zork 2";
+
+###############################################################################
+map "Main Area";
+
+room "Inside the Barrow" start;
+	item "lamp" tag lamp keep;
+	item "sword" tag sword keep;
+room "Narrow Tunnel" dir s;
+room "Foot Bridge" dir s;
