@@ -19,9 +19,12 @@ room "Great Cavern" dir s sw;
 room "Shallow Ford" dir sw s;
   task "turn on lamp" tag turn_on_lamp need lamp;
 room "Dark Tunnel" tag dark_tunnel dir s sw after turn_on_lamp;
-room "Path Near Stream" tag path_near_stream dir sw;
-room "Carousel Room" tag carousel_room dir sw style puzzle exit nw n ne w e sw s se;
+room "Path Near Stream" tag path_near_stream dir sw se sw;
+room "Carousel Room" tag carousel_room dir sw
+  style puzzle
+  exit nw n ne w e sw s se
   note "random exits";
+
 room "North End of Garden" dir se s from dark_tunnel;
   item "unicorn";
   item "gold key";
@@ -32,3 +35,17 @@ room "Gazebo" dir e go in;
   item "newspaper";
   item "letter opener";
 room "Formal Garden" dir s link path_near_stream;
+room "Topiary" dir s link carousel_room;
+
+room "Marble Hall" dir n from carousel_room;
+  item "square brick";
+
+room "Cobwebby Corridor" dir sw from carousel_room
+  exit n sw;
+  item "coil of string";
+
+room "Cool Room" dir nw from carousel_room
+  exit n w;
+
+room "Menhir Room" dir s from carousel_room
+  exit s sw;
